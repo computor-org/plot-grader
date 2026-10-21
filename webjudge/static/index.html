@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>plotcheck – Beurteilung</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <span class="brand">plotcheck</span>
+  <span class="count" id="count">…</span>
+  <div class="bar" title="Fortschritt"><div id="bar"></div></div>
+  <span class="count" id="answered"></span>
+  <a href="/anleitung">Anleitung und Kriterien</a>
+</header>
+<div class="dots" id="dots" aria-label="Übersicht aller Fälle"></div>
+<main id="main">
+  <div class="pair">
+    <div class="pane"><h2>Referenz</h2><img id="ref" alt="Referenzlösung"></div>
+    <div class="pane"><h2>Abgabe</h2><img id="stu" alt="Abgabe"></div>
+  </div>
+  <div class="decide">
+    <div class="card">
+      <div class="verdicts">
+        <button class="PASS" data-v="PASS">Akzeptabel<kbd>A</kbd></button>
+        <button class="FAIL" data-v="FAIL">Nicht akzeptabel<kbd>N</kbd></button>
+        <button class="UNSURE" data-v="UNSURE">Unsicher<kbd>U</kbd></button>
+      </div>
+      <div class="nav">
+        <button id="prev">← Zurück</button>
+        <button id="next" class="primary">Weiter →</button>
+        <button id="open">Nächster offener Fall</button>
+        <span class="status" id="status"></span>
+      </div>
+    </div>
+    <div class="card">
+      <div><b>Verletztes Kriterium</b> <span class="hint">(optional, Tasten 1–6)</span></div>
+      <div class="crit" id="crit"></div>
+      <p class="hint">Kommentar (optional)</p>
+      <textarea id="comment" placeholder="z. B. was auffällt oder warum unsicher"></textarea>
+    </div>
+  </div>
+</main>
+<div class="lightbox" id="lb">
+  <div class="top">
+    <b id="lbtitle"></b>
+    <button id="lbswap">Referenz ⇄ Abgabe (Leertaste)</button>
+    <span style="flex:1"></span>
+    <span>Klick ins Bild: vergrößern · Esc: schließen</span>
+    <button id="lbclose">Schließen</button>
+  </div>
+  <div class="stage"><img id="lbimg" alt=""></div>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>

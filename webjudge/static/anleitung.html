@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>plotcheck – Anleitung</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <span class="brand">plotcheck</span>
+  <span class="spacer"></span>
+  <a href="/">Zur Beurteilung →</a>
+</header>
+<div class="doc">
+<h1>Anleitung</h1>
+<p>Links Referenz, rechts Abgabe. Frage: <b>zeigt die Abgabe denselben Inhalt?</b></p>
+
+<h2>Bedienung</h2>
+<ul>
+  <li><kbd>A</kbd> akzeptabel · <kbd>N</kbd> nicht akzeptabel · <kbd>U</kbd> unsicher</li>
+  <li><kbd>1</kbd>–<kbd>6</kbd> Grund (optional) · <kbd>←</kbd> <kbd>→</kbd> blättern</li>
+  <li>Bild anklicken: groß, <kbd>Leertaste</kbd> wechselt Referenz/Abgabe</li>
+  <li>Alles wird sofort gespeichert. Erster Eindruck genügt.</li>
+</ul>
+
+<h2>Nicht akzeptabel, wenn</h2>
+<ul>
+  <li><b>M1</b> eine Kurve fehlt oder eine Datenreihe zu viel ist</li>
+  <li><b>M2</b> Daten sichtbar anders (Lage, Steigung, Höhe, Periode)</li>
+  <li><b>M3</b> andere Achse (log/linear) oder Bereich schneidet Daten ab</li>
+  <li><b>M4</b> Achsenbeschriftung fehlt oder meint etwas anderes</li>
+  <li><b>M5</b> Kurven nicht unterscheidbar oder Legende falsch</li>
+  <li><b>M6</b> ein Teilbild fehlt</li>
+</ul>
+
+<h2>Egal sind</h2>
+<p>Farbe, Linienart, Marker, Strichstärke · Reihenfolge, Punktdichte, Bildgröße ·
+Legendenposition, Gitter, Ränder · Wortlaut, Sprache, Großschreibung · Titel ·
+andere Zufallszahlen mit gleicher Verteilung.</p>
+
+<h2>Drei Beispiele</h2>
+<div id="examples"></div>
+<p><a href="/">Zur Beurteilung →</a></p>
+</div>
+<script>
+const EX = [
+  "Nur Farben und Legende anders.",
+  "Halber x-Bereich.",
+  "Grüne Kurve fehlt.",
+];
+fetch("/api/state").then((r) => r.json()).then((s) => {
+  const box = document.getElementById("examples");
+  s.examples.forEach((e, i) => {
+    const ok = e.verdict === "PASS";
+    const d = document.createElement("div");
+    d.className = "ex";
+    d.innerHTML = `<h3>Beispiel ${i + 1}: <span class="verdict" style="color:var(${ok ? "--ok" : "--bad"})">${ok ? "Akzeptabel" : "Nicht akzeptabel, " + e.criterion}</span></h3>
+      <div class="pair"><div class="pane"><h2>Referenz</h2><img src="/${e.ref}" alt="Referenz"></div>
+      <div class="pane"><h2>Abgabe</h2><img src="/${e.stu}" alt="Abgabe"></div></div>
+      <p>${EX[i] || ""}</p>`;
+    box.appendChild(d);
+  });
+});
+</script>
+</body>
+</html>

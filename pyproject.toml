@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plot-grader"
+version = "0.1.0"
+description = "Multi-tier visual plot grading system for matplotlib assignments"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "TU Graz ITPCP"}
+]
+dependencies = [
+    "numpy>=1.24",
+    "matplotlib>=3.7",
+    "opencv-python>=4.8",
+    "scikit-image>=0.21",
+    "Pillow>=10.0",
+    "pytest>=7.4",
+    "Jinja2>=3.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest-cov>=4.1",
+    "black>=23.0",
+    "ruff>=0.1",
+    "mypy>=1.5",
+]
+# Real Tier 4 grader (Qwen3-VL via MLX). Apple Silicon only; not installable
+# on Linux/Windows. tier4_real.py imports mlx_vlm lazily and stays optional
+# without this extra (Tier 4 is then disabled).
+mlx = [
+    "mlx-vlm>=0.1; sys_platform == 'darwin'",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v --tb=short"
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
