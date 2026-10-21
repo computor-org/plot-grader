@@ -88,4 +88,4 @@ and the solution patterns; check `git status` before committing.
 
 ## License
 
-MIT, see [LICENSE](LICENSE).
+Code: MIT (see [LICENSE](LICENSE)). Documentation (`docs/` and Markdown guides): CC BY 4.0 (see [LICENSE-DOCS](LICENSE-DOCS)).
