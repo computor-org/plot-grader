@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Round 3: Flash-Next with parallel requests on the 120-case evaluation set.
-# Runs every stage, writes docs/history/<date>-round3-flash-next.md, and
-# commits and pushes that report. Stages continue if one fails.
+# Runs every stage and writes the report into the results directory.
+# Stages continue if one fails.
 #
 # Usage: scripts/run_round3.sh [RESULTS_DIR]   (default data/vlm_eval/r3)
 set -u
@@ -36,9 +36,7 @@ run s4_scale050 --modes chat --views pair --workers 8 --scale 0.5
 # 5. JEV with the overall question only.
 run s5_jev_overall --modes jev --views pair --workers 8 --jev-overall-only
 
-# Report, commit, push.
-REPORT="docs/history/$(date +%Y-%m-%d)-round3-flash-next.md"
+# Report.
+REPORT="$R/report.md"
 uv run python scripts/report_round3.py "$R" "$REPORT" >> "$LOG" 2>&1
-git add "$REPORT" && git commit -q -m "Round-3 report: Flash-Next with parallel requests" \
-    && git push -q origin main >> "$LOG" 2>&1
 echo "$(date -Is) done report=$REPORT" >> "$LOG"
