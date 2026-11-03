@@ -25,4 +25,5 @@ uv run python scripts/run_validation.py
 - Stage files explicitly, and check `git status` for data before committing.
 - ruff, 88 columns. Fix what you touch; do not reformat whole files.
 - Keep docs short and factual. Do not add status reports, summaries or
-  emoji-decorated checklists to the repo; results go in `docs/history/`.
+  emoji-decorated checklists to the repo; evaluation reports stay in the
+  results directory and are not committed.
