@@ -3,9 +3,9 @@
 Grades matplotlib plot submissions against a reference solution. This is the
 plot-evaluation prototype for [Computor](https://github.com/computor-org)
 (netidee project 8012). [docs/criteria.md](docs/criteria.md) defines when a
-plot is acceptable, [docs/integration.md](docs/integration.md) describes the
-hook into the Computor test harness, and [docs/history/](docs/history/)
-records past evaluation runs.
+plot is acceptable and how the tolerant judge applies that, and
+[docs/integration.md](docs/integration.md) describes how the judge relates to
+the Computor test harness.
 
 **Data is not included.** This repository contains code only: no assignments,
 reference solutions or student submissions. The evaluation scripts in
@@ -51,7 +51,7 @@ uv run python scripts/run_vlm_eval.py --reference REF   # models x chat/JEV x vi
 ```
 
 `run_validation.py` and `run_ai_eval.py` take `--judge 27b|4b|flash-next
---mode chat|jev --view pair|student` to use an HTTP model as Tier 4.
+--mode chat|jev --view pair|pair_tolerant|student` to use an HTTP model as Tier 4.
 
 These scripts expect your own assignment repository in `../assignments/`
 (`XX_UnitXX/YY_name/` with `*_master.py`, `test.yaml` and
@@ -84,7 +84,8 @@ Never commit reference solutions or student data: students could find the
 solutions here. `.gitignore` covers `data/`, `assignments/`, `submissions/`
 and the solution patterns; check `git status` before committing.
 `tools/` contains the scripts that fetch submissions from a GitLab group into
-`data/` (see [tools/README.md](tools/README.md)).
+`data/` (see [tools/README.md](tools/README.md)). See
+[CONTRIBUTING.md](CONTRIBUTING.md) for the workflow.
 
 ## License
 
